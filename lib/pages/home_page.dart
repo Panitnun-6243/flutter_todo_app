@@ -28,7 +28,28 @@ class _HomePageState extends State<HomePage> {
         ),
         toolbarHeight: _deviceHeight * 0.1,
       ),
-      body: Container(),
+      body: _tasksList(),
+    );
+  }
+
+  Widget _tasksList() {
+    return ListView(
+      children: [
+        ListTile(
+          title: const Text(
+            'Learn Flutter',
+            style: TextStyle(decoration: TextDecoration.lineThrough),
+          ),
+          subtitle: Text(
+            DateTime.now().toString(),
+            style: const TextStyle(decoration: TextDecoration.lineThrough),
+          ),
+          trailing: IconButton(
+            icon: const Icon(Icons.check_box_outlined),
+            onPressed: () {},
+          ),
+        ),
+      ],
     );
   }
 }
