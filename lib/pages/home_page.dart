@@ -29,6 +29,7 @@ class _HomePageState extends State<HomePage> {
         toolbarHeight: _deviceHeight * 0.1,
       ),
       body: _tasksList(),
+      floatingActionButton: _addTaskButton(),
     );
   }
 
@@ -47,9 +48,20 @@ class _HomePageState extends State<HomePage> {
           trailing: IconButton(
             icon: const Icon(Icons.check_box_outlined),
             onPressed: () {},
+            color: Colors.lightGreen,
           ),
         ),
       ],
+    );
+  }
+
+  Widget _addTaskButton() {
+    return FloatingActionButton(
+      onPressed: () {},
+      child: const Icon(
+        Icons.add,
+        color: Colors.white,
+      ),
     );
   }
 }
