@@ -22,7 +22,6 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     _deviceHeight = MediaQuery.of(context).size.height;
     _deviceWidth = MediaQuery.of(context).size.width;
-    print("Input Value: $_newTaskContent");
 
     return Scaffold(
       appBar: AppBar(
@@ -42,7 +41,7 @@ class _HomePageState extends State<HomePage> {
     return FutureBuilder(
       future: Hive.openBox('tasks'),
       builder: (BuildContext _context, AsyncSnapshot _snapshot) {
-        if (_snapshot.connectionState == ConnectionState.done) {
+        if (_snapshot.hasData) {
           _box = _snapshot.data;
           return _tasksList();
         } else {
@@ -73,9 +72,17 @@ class _HomePageState extends State<HomePage> {
             icon: task.done
                 ? const Icon(Icons.check_box_outlined)
                 : const Icon(Icons.check_box_outline_blank_outlined),
-            onPressed: () {},
+            onPressed: () {
+              task.done = !task.done;
+              _box!.putAt(_index, task.toMap());
+              setState(() {});
+            },
             color: Colors.lightGreen,
           ),
+          onLongPress: () {
+            _box!.deleteAt(_index);
+            setState(() {});
+          },
         );
       },
     );
